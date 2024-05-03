@@ -18,11 +18,11 @@ jobs:
 
     steps:
       - name: Clone external repository
-        run: git clone https://github.com/lukevella/rallly.git && cd rallly && find .
+        run: git clone https://github.com/lukevella/rallly.git .
 
       - name: Get the latest tag name
         id: get_tag
-        run: echo "APP_VERSION=$(git -C rallly describe --tags $(git -C rallly rev-list --tags --max-count=1))" >> $GITHUB_ENV
+        run: echo "APP_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -38,10 +38,9 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          file: apps/web/Dockerfile
+          file: ./apps/web/Dockerfile
           tags: ghcr.io/hueske-digital/rallly:latest
           platforms: linux/amd64,linux/arm64
-          working-directory: rallly
           build-args: |
             SELF_HOSTED=true
             APP_VERSION=${{ env.APP_VERSION }}
