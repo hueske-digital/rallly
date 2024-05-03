@@ -38,7 +38,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: ./rallly/apps/web
           file: ./rallly/apps/web/Dockerfile
           tags: ghcr.io/hueske-digital/rallly:latest
           platforms: linux/amd64,linux/arm64
