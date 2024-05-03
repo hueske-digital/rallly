@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Clone external repository
-        run: git clone https://github.com/lukevella/rallly.git && ls && ls -lah
+        run: git clone https://github.com/lukevella/rallly.git && cd rallly && find .
 
       - name: Get the latest tag name
         id: get_tag
