@@ -38,9 +38,10 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          file: ./rallly/apps/web/Dockerfile
+          file: apps/web/Dockerfile
           tags: ghcr.io/hueske-digital/rallly:latest
           platforms: linux/amd64,linux/arm64
+          working-directory: rallly
           build-args: |
             SELF_HOSTED=true
             APP_VERSION=${{ env.APP_VERSION }}
